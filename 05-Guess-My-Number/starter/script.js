@@ -35,23 +35,15 @@ document.querySelector('.check').addEventListener('click', function () {
       highscore = score;
       document.querySelector('.highscore').textContent = highscore;
     }
-  } else if (guess > secretNumber) {
+  } else if (guess !== secretNumber) {
     if (score > 1) {
-      document.querySelector('.message').textContent = 'Prevelik broj';
+      document.querySelector('.message').textContent =
+        guess > secretNumber ? 'Prevelik broj' : 'Premali broj';
       score--;
       document.querySelector('.score').textContent = score;
     } else {
       document.querySelector('.message').textContent = 'IZGUBILI STE!!!';
-      document.querySelector('.score').textContent = 20;
-    }
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = 'Premali broj';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.message').textContent = 'IZGUBILI STE!!!';
-      document.querySelector('.score').textContent = 20;
+      document.querySelector('.score').textContent = 0;
     }
   }
 });
