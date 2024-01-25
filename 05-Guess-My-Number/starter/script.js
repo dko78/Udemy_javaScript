@@ -15,10 +15,11 @@ const secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 document.querySelector('.number').textContent = secretNumber;
 
-let score = 20; //state varijable je  pa kak to  strašno baš
+let score = 20; //state varijable
 
 document.querySelector('.check').addEventListener('click', function () {
-  const guess = Number(document.querySelector('.guess').value);
+  //tu se klasa zove btn check, ima 2 naziva ali btn je generički pa ga ne koristiš
+  const guess = Number(document.querySelector('.guess').value); //zato što je input type Number, onda ide .value
   console.log(typeof guess);
 
   if (!guess) {
@@ -27,7 +28,7 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent = 'Ispravan broj';
     score = 0;
     console.log('promijeni u zelen');
-    document.querySelector('body').style.background = '#60b347';
+    document.querySelector('body').style.backgroundColor = '#60b347';
     //novi komentar
     document.querySelector('.number').style.width = '30rem';
   } else if (guess > secretNumber) {
