@@ -11,11 +11,10 @@ document.querySelector('.guess').value = 23;//input fileld je NUMBER
 
 console.log(document.querySelector('.guess').value);
 */
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
-
-document.querySelector('.number').textContent = secretNumber;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 let score = 20; //state varijable
+let highscore = 0;
 
 document.querySelector('.check').addEventListener('click', function () {
   //tu se klasa zove btn check, ima 2 naziva ali btn je generički pa ga ne koristiš
@@ -26,11 +25,16 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent = 'No Number!';
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = 'Ispravan broj';
-    score = 0;
+
+    document.querySelector('.number').textContent = secretNumber;
     console.log('promijeni u zelen');
     document.querySelector('body').style.backgroundColor = '#60b347';
-    //novi komentar
     document.querySelector('.number').style.width = '30rem';
+
+    if (score > highscore) {
+      highscore = score;
+      document.querySelector('.highscore').textContent = highscore;
+    }
   } else if (guess > secretNumber) {
     if (score > 1) {
       document.querySelector('.message').textContent = 'Prevelik broj';
@@ -50,4 +54,16 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.score').textContent = 20;
     }
   }
+});
+
+document.querySelector('.again').addEventListener('click', function () {
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  document.querySelector('.message').textContent = 'Start guessing...';
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.guess').value = '';
+
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
 });
