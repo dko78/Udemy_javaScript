@@ -16,16 +16,19 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20; //state varijable
 let highscore = 0;
 
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
 document.querySelector('.check').addEventListener('click', function () {
   //tu se klasa zove btn check, ima 2 naziva ali btn je generički pa ga ne koristiš
   const guess = Number(document.querySelector('.guess').value); //zato što je input type Number, onda ide .value
   console.log(typeof guess);
 
   if (!guess) {
-    document.querySelector('.message').textContent = 'No Number!';
+    displayMessage('No Number!');
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = 'Ispravan broj';
-
+    displayMessage('Ispravan broj');
     document.querySelector('.number').textContent = secretNumber;
     console.log('promijeni u zelen');
     document.querySelector('body').style.backgroundColor = '#60b347';
@@ -37,12 +40,12 @@ document.querySelector('.check').addEventListener('click', function () {
     }
   } else if (guess !== secretNumber) {
     if (score > 1) {
-      document.querySelector('.message').textContent =
-        guess > secretNumber ? 'Prevelik broj' : 'Premali broj';
+      displayMessage(guess > secretNumber ? 'Prevelik broj' : 'Premali broj');
+
       score--;
       document.querySelector('.score').textContent = score;
     } else {
-      document.querySelector('.message').textContent = 'IZGUBILI STE!!!';
+      displayMessage('IZGUBILI STE!!!');
       document.querySelector('.score').textContent = 0;
     }
   }
@@ -51,7 +54,8 @@ document.querySelector('.check').addEventListener('click', function () {
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
-  document.querySelector('.message').textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
+
   document.querySelector('.score').textContent = score;
   document.querySelector('.number').textContent = '?';
   document.querySelector('.guess').value = '';
