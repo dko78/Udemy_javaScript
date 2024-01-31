@@ -18,3 +18,9 @@ for (let index = 0; index < btnsOpenModal.length; index++) {
     overlay.classList.remove('hidden');
   });
 }
+
+btnCloseModal.addEventListener('click', function () {
+  //function
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
+});
