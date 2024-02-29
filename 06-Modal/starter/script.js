@@ -9,7 +9,7 @@ const btnCloseModal = document.querySelector('.close-modal');
 const btnsOpenModal = document.querySelectorAll('.show-modal');
 
 const openModal = function () {
-  console.log('Button clicked');
+  // console.log('Button clicked');
   modal.classList.remove('hidden'); //ne smijes točku staviti. TOčka je samo za selektor
   overlay.classList.remove('hidden');
 };
@@ -28,3 +28,10 @@ for (let index = 0; index < btnsOpenModal.length; index++) {
 btnCloseModal.addEventListener('click', closeModal);
 
 overlay.addEventListener('click', closeModal);
+//81
+document.addEventListener('keydown', function (e) {
+  console.log(e.key);
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    closeModal(); //ovdje moraš pozvati sa () jer ti je ulaz dukcija (e) - event
+  }
+});
