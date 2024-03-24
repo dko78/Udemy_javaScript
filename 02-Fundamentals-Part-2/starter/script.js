@@ -219,7 +219,7 @@ const bills = [125, 555, 44];
 const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 
 console.log(bills, tips);
-
+*/
 // O b j e c t s
 //object literal concept
 const ja = {
@@ -334,8 +334,8 @@ if (mark.calcBMI() > john.calcBMI()) {
 } else {
   console.log(`${john.fullName}' s BMI ${john.bmi} je veće`);
 }
-
-*/
+/*
+ */
 // l o o p s
 //vrti se dok j e2. uvjet = TRUE
 // for (let i = 1; i <= 10; i++) {
@@ -454,6 +454,7 @@ while (dice !== 6) {
 }
 */
 
+/*
 console.log("-----------------------task loops-----------------");
 
 const calcTip = function (bill) {
@@ -486,3 +487,4 @@ const calcAverage = function (arr) {
 console.log(calcAverage([2, 3, 6]));
 
 console.log(calcAverage(tips));
+*/
