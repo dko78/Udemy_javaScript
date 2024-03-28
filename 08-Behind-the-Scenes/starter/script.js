@@ -1,9 +1,9 @@
 'use strict';
 //https://github.com/jonasschmedtmann/complete-javascript-course
 
-const myName = 'Dalibor';
+const myName1 = 'Dalibor';
 
-function first() {
+function first1() {
   const age = 45;
 
   if (age >= 30) {
@@ -14,14 +14,31 @@ function first() {
     var millenial = true;
   }
 
-  function second() {
+  function second2() {
     const job = 'teacher';
-    console.log(`${myName} is a ${age}-old ${job} `); //ima pristup
+    console.log(`${myName1} is a ${age}-old ${job} `); //ima pristup
     //console.log(`decade varijabla je: ${decade}`); ovo ne radi,nema pristup const,let varijablama iz gornjeg bloka
     console.log(`millenial varijabla je: ${millenial}`); //ovo radi jer var nije block scope
   }
 
-  second();
+  second2();
 }
 
-first();
+first1();
+
+//                                  scoping in practice
+//global scope funckija
+function calcAge(birthYear) {
+  //const firstName = 'Emina'; ako nazovešisto uzeti će ovu iz funckijene globals scop-a
+  const age = 2024 - birthYear;
+  //console.log(firstName); //first name nije definirana u funciji, alije def. na global scopu
+  function printAge() {
+    const output = `You are ${age}, born in ${birthYear}`; //ovaj parametar funcije birthYear kod funkcija je kao varijabla
+    console.log(output);
+  }
+  printAge();
+  return age;
+}
+
+const firstName = 'Dalibor';
+calcAge(1978);
