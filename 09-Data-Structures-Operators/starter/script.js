@@ -11,9 +11,6 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  order: function (starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-  },
 
   openingHours: {
     thu: {
@@ -28,6 +25,24 @@ const restaurant = {
       open: 0, // Open 24 hours
       close: 24,
     },
+  },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery: function ({
+    starterIndex = 0, //default values
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[mainIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Eto ti paste sa ${ing1}, ${ing2}, ${ing3}`);
   },
 };
 
@@ -283,3 +298,103 @@ console.log(firstBook, secondBook);
 
 const [, , thirdBook] = books;
 console.log(thirdBook);
+
+//dest. polje unutar polja
+const ratings = [
+  ['rating', 4.19],
+  ['ratingsCount', 144584],
+];
+
+const [[, rating], [, ratinCounts]] = ratings;
+
+console.log('rating:' + rating + ' count: ' + ratinCounts); //altgr + 7 backtick
+
+//zadatak
+const ratingStars = [63405, 1808];
+
+const [fiveStarRatings, oneStarRatings, threeStarRatings = 0] = ratingStars;
+
+//destracturing objects
+const { name, openingHours, categories } = restaurant;
+
+console.log(name, openingHours, categories);
+
+const { menu = [], starterMenu: starters = [] } = restaurant; //dajemo defoutlete vrijednosti ako nema u objektu
+
+//mutating variables
+let a = 111;
+let b = 333;
+
+const obj = {
+  a: 23,
+  b: 7,
+  c: 17,
+};
+//moras u zagrede staviti!
+({ a, b } = obj);
+console.log(a, b);
+
+//nested objects
+
+const {
+  fri: { open: o, close: c },
+} = openingHours;
+
+//console.log(fri);
+console.log(o, c);
+restaurant.orderDelivery({
+  time: '22:40',
+  address: 'Vrlika 71, Daruvar',
+  mainIndex: 2,
+  starterIndex: 1,
+});
+
+//spread operator
+
+const arr1 = [7, 8, 9];
+
+const newArr1 = [1, 2, ...arr1];
+
+console.log(newArr1);
+
+console.log(...newArr1);
+
+const newMenu = [...restaurant.mainMenu, 'Sarma'];
+
+console.log(newMenu);
+console.log(...newMenu);
+
+// copy array
+const mainMenuCopy = [...restaurant.mainMenu];
+
+//join 2 or more array together
+const menuX = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+//iterables : array, strings, maps, setts NOT Objects
+const str = 'Jonas';
+const letters = [...str, ' ', 'S.'];
+console.log(letters);
+
+//multiple values sep. by comma samo kdo poziva funckija ili novi array
+//real world example
+/*
+const ingrediants = [
+  prompt("Let's make pasta! Indegriedient 1?"),
+  prompt('Ingrediant2?'),
+  prompt('Ingrediant3?'),
+];
+
+console.log(ingrediants);
+
+restaurant.orderPasta(...ingrediants);
+*/
+//new resturan object
+const newResturant = { foundedIn: 1998, ...restaurant, founder: 'Đuro' };
+
+console.log(newResturant);
+
+const resturantCopy = { ...restaurant };
+resturantCopy.name = 'Little Italy';
+
+console.log(resturantCopy.name);
+console.log(restaurant.name);
