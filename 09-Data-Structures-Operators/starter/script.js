@@ -388,7 +388,7 @@ console.log(ingrediants);
 
 restaurant.orderPasta(...ingrediants);
 */
-//new resturan object
+//new resturan object test
 const newResturant = { foundedIn: 1998, ...restaurant, founder: 'Đuro' };
 
 console.log(newResturant);
