@@ -44,6 +44,11 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Eto ti paste sa ${ing1}, ${ing2}, ${ing3}`);
   },
+
+  orderPizza: function (mainIngrediant, ...otherIngrediants) {
+    console.log(mainIngrediant);
+    console.log(otherIngrediants);
+  },
 };
 
 const arr = [2, 3, 4, 12, 17];
@@ -386,7 +391,7 @@ const ingrediants = [
 
 console.log(ingrediants);
 
-restaurant.orderPasta(...ingrediants);
+restaurant.orderPasta(...ingrediants);//kao da si stavio indgrediants[0], indgrediants[1],indgrediants[2]
 */
 //new resturan object test
 const newResturant = { foundedIn: 1998, ...restaurant, founder: 'Đuro' };
@@ -398,3 +403,43 @@ resturantCopy.name = 'Little Italy';
 
 console.log(resturantCopy.name);
 console.log(restaurant.name);
+
+//1) desctructuring
+//spread,beacuse on RIGHT side of =
+//koristiš gdje bi vrijednosti odvojio sa zarezom
+const arr11 = [1, 2, ...[3, 4]]; //1,2,[3,4]
+
+//rest operator becaouse LEFT of =
+//uzima više vrijednosti i pakira ih u 1 array, suprotno od spread
+//koristiš tamo gdje bi imena varijabli odvojio zareziom---ne VRIJEDNOSTI
+const [a1, b1, ...others] = [1, 2, 3, 4, 5];
+console.log(a1, b1, others);
+
+const [pizza, , risotto, ...OtherFood] = [
+  ...resturantCopy.mainMenu,
+  ...restaurant.starterMenu,
+];
+
+console.log(pizza, risotto, OtherFood);
+
+//objects
+const { sat, ...weekdays } = restaurant.openingHours;
+
+console.log(weekdays);
+
+//2) Functions
+
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
+
+add(2, 3);
+add(5, 3, 7, 2);
+
+const x1 = [13, 5, 7];
+add(...x1); //spreading
+//a onda ga funkcija sa upakira u polje gore function(...numbers)
+
+restaurant.orderPizza('mushroom', 'onion', 'olives', 'spimach');
