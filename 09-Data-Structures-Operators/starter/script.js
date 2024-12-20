@@ -451,7 +451,8 @@ const guestN1 = restaurant.numGuests ? restaurant.numGuests : 10;
 const guestN2 = restaurant.numGuests || 10;
 
 console.log('--------AND-------------');
-// short circuing AND ||, prva falsy vrijednost vraća...ili zadnju ako su sve thruly
+// short circuing AND &&, prva falsy vrijednost vraća...ili zadnju ako su sve thruly
+//nastvalja ako je prvo thruthy
 console.log(0 && 'Ja'); //vraća 0
 console.log(1 && 'Ja'); //vraća ja
 //ako postoji metohda orderPizza onda ćeš ju pozvati
@@ -463,3 +464,40 @@ restaurant.numGuests = 0;
 const guestsN3 = restaurant.numGuests || 10; //vraća 10 jer je 0 falsy
 
 const guestCorrect = restaurant.numGuests ?? 10; //vraća 0, nullish values null, undefined
+
+//logical assingment
+const rest1 = {
+  name: 'LItally',
+  //numGuests: 0, 0je flasy pazi || jer će ti vratit dolje 10
+  numGuests: 20,
+};
+
+const rest2 = {
+  name: 'Piccolo',
+  owner: 'Dalibor',
+};
+
+//defautlno broj gostiju
+
+rest1.numGuests = rest1.numGuests || 10; //ako je prva vrijednost thruthy vraća ju, ni ne gleda dalje, ako ne slijedeća
+rest2.numGuests = rest2.numGuests || 10;
+// OR assigment operator - daje vrijednost varijablu ako je trenutno falsy vrijednost varijable
+rest1.numGuests ||= 10;
+
+//ali bolje sa nullish jer ako daš 0 neće biti dobro
+
+//nullish (null or undefined)
+rest1.numGuests ??= 10; //isto što i ovo rest1.numGuests = rest1.numGuests || 10;
+rest2.numGuests ??= 10; //ako je vrijesnost nullish dodjeliti će varijabli vrijensost
+
+//AND assignment operator
+//ako postoji owner zelimo ju zamijeniti sa anonymous
+//assign valu if is trhruthy
+rest1.owner = rest1.owner && '<ANONyMOUS>'; //ako je prva falsy vraća tu vrijednost
+//ako je vrijedsnot thruthy vraća drugu vrijendnost
+//konkretno prva vrijednost je thruthy pa vraća drugu
+
+//asajna vrijednost varijabli akoje thruthy
+//ako npr zeliš dodijeliti vrijesnost varijabli koje je već definirana
+rest1.owner &&= '<ANONyMOUS>';
+rest2.owner &&= '<ANONyMOUS>';
