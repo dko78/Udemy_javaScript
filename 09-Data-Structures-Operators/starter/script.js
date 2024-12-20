@@ -443,3 +443,23 @@ add(...x1); //spreading
 //a onda ga funkcija sa upakira u polje gore function(...numbers)
 
 restaurant.orderPizza('mushroom', 'onion', 'olives', 'spimach');
+
+// falsy values: false, '', 0 , null, undefined,
+//short circuiting OR || , PRVA TRUTHY VALUE, ili zadnja ako je sve falsy
+const guestN1 = restaurant.numGuests ? restaurant.numGuests : 10;
+
+const guestN2 = restaurant.numGuests || 10;
+
+console.log('--------AND-------------');
+// short circuing AND ||, prva falsy vrijednost vraća...ili zadnju ako su sve thruly
+console.log(0 && 'Ja'); //vraća 0
+console.log(1 && 'Ja'); //vraća ja
+//ako postoji metohda orderPizza onda ćeš ju pozvati
+restaurant.orderPizza && restaurant.orderPizza('salama', 'gljive');
+
+//nullish coalesing ??
+
+restaurant.numGuests = 0;
+const guestsN3 = restaurant.numGuests || 10; //vraća 10 jer je 0 falsy
+
+const guestCorrect = restaurant.numGuests ?? 10; //vraća 0, nullish values null, undefined
