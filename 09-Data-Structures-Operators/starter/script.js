@@ -26,7 +26,7 @@ const restaurant = {
       close: 24,
     },
   },
-  order: function (starterIndex, mainIndex) {
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
@@ -354,7 +354,7 @@ restaurant.orderDelivery({
   starterIndex: 1,
 });
 
-//spread operator
+//spread operator, ono što bi inače zaarezom odvajali
 
 const arr1 = [7, 8, 9];
 
@@ -403,7 +403,8 @@ resturantCopy.name = 'Little Italy';
 
 console.log(resturantCopy.name);
 console.log(restaurant.name);
-
+//spread - unpack array ...
+//rest pack into arras
 //1) desctructuring
 //spread,beacuse on RIGHT side of =
 //koristiš gdje bi vrijednosti odvojio sa zarezom
@@ -424,7 +425,7 @@ console.log(pizza, risotto, OtherFood);
 
 //objects
 const { sat, ...weekdays } = restaurant.openingHours;
-
+//uzima subotu i ostale dane
 console.log(weekdays);
 
 //2) Functions
@@ -445,7 +446,8 @@ add(...x1); //spreading
 restaurant.orderPizza('mushroom', 'onion', 'olives', 'spimach');
 
 // falsy values: false, '', 0 , null, undefined,
-//short circuiting OR || , PRVA TRUTHY VALUE, ili zadnja ako je sve falsy
+//------short circuiting OR || , PRVA TRUTHY VALUE, ili zadnja ako je sve falsy
+//ako je prva falsy vraća drugu!!! ako je prva falsy nastavlja
 const guestN1 = restaurant.numGuests ? restaurant.numGuests : 10;
 
 const guestN2 = restaurant.numGuests || 10;
@@ -453,13 +455,14 @@ const guestN2 = restaurant.numGuests || 10;
 console.log('--------AND-------------');
 // short circuing AND &&, prva falsy vrijednost vraća...ili zadnju ako su sve thruly
 //nastvalja ako je prvo thruthy
+//ako je prva thruty vraća drugu!!! ako je prva thruthy nastavlja
 console.log(0 && 'Ja'); //vraća 0
 console.log(1 && 'Ja'); //vraća ja
 //ako postoji metohda orderPizza onda ćeš ju pozvati
 restaurant.orderPizza && restaurant.orderPizza('salama', 'gljive');
 
 //nullish coalesing ??
-
+// nullish = null, undefined
 restaurant.numGuests = 0;
 const guestsN3 = restaurant.numGuests || 10; //vraća 10 jer je 0 falsy
 
@@ -468,7 +471,7 @@ const guestCorrect = restaurant.numGuests ?? 10; //vraća 0, nullish values null
 //logical assingment
 const rest1 = {
   name: 'LItally',
-  //numGuests: 0, 0je flasy pazi || jer će ti vratit dolje 10
+  //numGuests: 0, 0j e flasy pazi || jer će ti vratit dolje 10
   numGuests: 20,
 };
 
@@ -501,3 +504,69 @@ rest1.owner = rest1.owner && '<ANONyMOUS>'; //ako je prva falsy vraća tu vrijed
 //ako npr zeliš dodijeliti vrijesnost varijabli koje je već definirana
 rest1.owner &&= '<ANONyMOUS>';
 rest2.owner &&= '<ANONyMOUS>';
+
+//for loop
+
+const menux = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+//for of loop
+for (const item of menux) console.log(item);
+//sa indexima
+for (const [i, el] of menux.entries()) {
+  //destrukturiraš jer je entries array
+  console.log(`${i + 1} : ${el}`);
+}
+
+if (restaurant.openingHours.fri) console.log(restaurant.openingHours.fri.open);
+
+//optional chaining
+console.log(restaurant.openingHours.mon?.open); //ako mon postoji onda će pročitati open property, inače undefined
+
+console.log(restaurant.openingHours?.mon?.open); //ako openingHours propertx ne posoji ne ide dalje, inače undefined
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  //console.log(day);
+  const open = restaurant.openingHours[day]?.open ?? 'closed'; //ako zeliš koristiti variable name kao property name onda []
+  console.log(`On ${day}, we  open at ${open}`);
+}
+
+//Methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+
+//Arrays
+const users = [{ name: 'Dalibor', email: 'dd@gdgf.hr' }];
+
+console.log(users[0]?.name ?? 'User array empty');
+
+//looping over objects whitch is not iterrables, we loop thrue keys
+
+const properties = Object.keys(openingHours);
+
+console.log(properties);
+
+let openStr = `We are open on ${properties.length} days:`;
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+
+for (const day of Object.keys(openingHours)) {
+  console.log(day);
+}
+
+console.log(openStr);
+
+//property values
+
+const values = Object.values(openingHours);
+console.log(values);
+
+//entries object keys + values, niej isto kao Array
+const entries = Object.entries(openingHours);
+//console.log(enties);
+//jesnostvnij primejr je sert [key, value], ali tu je value opet objekt pa zato tako
+for (const [key, { open, close }] of entries) {
+  // u biti destrukturiraš key i values,a values je objekt koji sadrzi open i close
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
