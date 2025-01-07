@@ -82,6 +82,7 @@ const {
   odds: { team1, x: draw, team2 },
 } = game; //destructuring double
 
+console.log(team1, team2);
 //6
 const printGoals = function (...players) {
   console.log(`${players.length} goals were scored`);
@@ -93,3 +94,13 @@ printGoals(...game.scored); //ako samo staviš game.scored vratiti će 1
 //7
 team1 < team2 && console.log('Team 1 is more likely to win'); //akoje prvo točno vraća drugo
 
+//ili
+team1 < team2
+  ? console.log('ter Team 1 is more likely to win')
+  : console.log('ter Team 2 is more likely to win');
+
+console.log(0 || 'Ja'); //vraća ja--ako je prva falsy vraća 2.
+console.log(1 || 'Ja'); //1--ako je prva istina vraća to
+
+console.log(0 && 'Ja'); //vraća 0
+console.log(1 && 'Ja'); //vraća ja--akoje prva istina vraća 2
