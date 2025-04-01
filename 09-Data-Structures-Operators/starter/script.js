@@ -4,6 +4,24 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+const italianFoods = new Set([
+  'pasta',
+  'gnocchi',
+  'tomatoes',
+  'olive oil',
+  'garlic',
+  'basil',
+]);
+
+const mexicanFoods = new Set([
+  'tortillas',
+  'beans',
+  'rice',
+  'tomatoes',
+  'avocado',
+  'garlic',
+]);
+
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -570,3 +588,81 @@ for (const [key, { open, close }] of entries) {
   // u biti destrukturiraš key i values,a values je objekt koji sadrzi open i close
   console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
+
+console.log(Object.entries(openingHours));
+
+const email = 'dkovacic3@erstebank.hr';
+
+const loginEmail = ' Dkovacic3@erstebank.hr \n';
+
+const lowerEmail = loginEmail.toLocaleLowerCase();
+const trimmedEmail = loginEmail.trim();
+
+console.log('Dalibor'.slice(-4));
+
+console.log('Dalibor'.padStart(20, '+'));
+
+console.log('Dalibor'.padEnd(20, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4); //zadnja 4 znaka
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(54515165165151));
+
+//split and join
+const [firstName, lastName] = 'Dalibor Kovačić'.split(' ');
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const nameUpper = [];
+
+  for (const n of names) {
+    //nameUpper.push(n[0].toUpperCase() + n.slice(1));
+    nameUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(nameUpper.join(' '));
+};
+
+capitalizeName('dalibor kovačić');
+
+//Padding
+
+const message = 'Go to gate 23!';
+
+console.log(message.padStart(25, '+'));
+
+console.log(message.padEnd(25, '+'));
+
+//coding challenge
+/*
+  underscore_case
+  first_name
+  Some_VAriable
+  calculate_AGE
+  delayed_departure
+*/
+document.body.append(document.createElement('textarea'));
+
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+  // console.log(rows);
+
+  for (const row of rows) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(output);
+  }
+});
